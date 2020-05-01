@@ -14,10 +14,12 @@ private static HttpClient httpClient = new HttpClient();
 
 public static async Task<HttpResponseMessage> Run(HttpRequest req, ILogger log)
 {
-    var logicAppUri = Environment.GetEnvironmentVariable("GetTasksLogicAppUri");
+    var apiUri = Environment.GetEnvironmentVariable("GetTasksAPI");
+    var subscriptionKey = Environment.GetEnvironmentVariable("APISubscriptionKey");
     var reqbody = await new StreamReader(req.Body).ReadToEndAsync();
 
-    var response = await httpClient.GetAsync(logicAppUri); 
+    httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+    var response = await httpClient.GetAsync(apiUri); 
     var resultstring = await response.Content.ReadAsStringAsync();
 
     return response.IsSuccessStatusCode
