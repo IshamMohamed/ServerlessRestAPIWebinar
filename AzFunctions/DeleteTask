@@ -14,7 +14,7 @@ private static HttpClient httpClient = new HttpClient();
 
 public static async Task<HttpResponseMessage> Run(HttpRequest req, int id, ILogger log)
 {
-    var logicAppUri = Environment.GetEnvironmentVariable("GetTaskLogicAppUri");
+    var logicAppUri = Environment.GetEnvironmentVariable("DeleteTaskLogicAppUri");
     var reqbody = await new StreamReader(req.Body).ReadToEndAsync();
 
     var response = await httpClient.DeleteAsync(string.Format(logicAppUri, id)); 
