@@ -14,7 +14,7 @@ private static HttpClient httpClient = new HttpClient();
 
 public static async Task<HttpResponseMessage> Run(HttpRequest req, ILogger log)
 {
-	var logicAppUri = Environment.GetEnvironmentVariable("PostTaskLogicAppUri");
+    var logicAppUri = Environment.GetEnvironmentVariable("PostTaskLogicAppUri");
     var reqbody = await new StreamReader(req.Body).ReadToEndAsync();
 
     var response = await httpClient.PostAsync(logicAppUri, new StringContent(reqbody, Encoding.UTF8, "application/json")); 
